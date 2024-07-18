@@ -1,24 +1,25 @@
-image: gradle:7.6.0-jdk19
-
-services:
-  - mysql:8.0
+image: gradle:7.6.0-jdk19-alpine
 
 stages:
   - build
   - test
 
 variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   MYSQL_DATABASE: project_db
   MYSQL_ROOT_PASSWORD: pwd1
   MYSQL_USER: root
   MYSQL_PASSWORD: pwd1
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+services:
+  - name: mysql:8.0
+    alias: mysql
 
 before_script:
-  - apt-get update && apt-get install -y mysql-client
   - chmod +x gradlew
-  - echo "Waiting for MySQL to be ready..."
-  - until mysql -h "mysql" -u"$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "SHOW DATABASES;"; do sleep 1; done
+  - export SPRING_DATASOURCE_URL="jdbc:mysql://mysql:3306/${MYSQL_DATABASE}"
+  - export SPRING_DATASOURCE_USERNAME=$MYSQL_USER
+  - export SPRING_DATASOURCE_PASSWORD=$MYSQL_PASSWORD
 
 cache:
   paths:

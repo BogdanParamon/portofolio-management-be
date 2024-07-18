@@ -24,7 +24,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-@DataJpaTest
 @ExtendWith(MockitoExtension.class)
 public class TemplateServiceTest {
 

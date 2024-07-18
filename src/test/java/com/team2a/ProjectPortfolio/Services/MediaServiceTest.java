@@ -36,7 +36,6 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-@DataJpaTest
 @ExtendWith(MockitoExtension.class)
 public class MediaServiceTest {
 

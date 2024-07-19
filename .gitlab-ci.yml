@@ -12,7 +12,7 @@ variables:
   MYSQL_PASSWORD: pwd1
 
 services:
-  - name: mysql:8.0
+  - name: mysql:latest
     alias: mysql
 
 before_script:
